@@ -1,13 +1,12 @@
 """
 data_analysis_M3.py
 -------------------
-Module for analysing collated quiz answer data.
-
-This module provides two functions:
-  - generate_means_sequence: computes the mean answer per question
-  - visualize_data: plots the means as a scatter or line chart
-
-Author: Ahmad Nidhal Bin Zaidi
+This module is to analyse the collated quiz answers from my Team Member 2.
+Mainly, it has 2 functions;
+  1. generate_means_sequence: this function will calculate the mean of each question of 100 questions
+  2. visualize_data : this function function will plot the data as a graph.
+  
+Author: Ahmad Nidhal Bin ZAIDI
 Module: MATH1604 Modelling for Big Data
 """
 
@@ -15,6 +14,8 @@ import matplotlib.pyplot as plt
 
 def _parse_collated_file(collated_answers_path):
     """
+    The collated answers file will be read and it will return eveyone's answer as a list.
+    
     Read a collated answers file and return a list of answer sequences.
 
     The collated file contains one respondent's answers per line (100
