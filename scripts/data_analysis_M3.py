@@ -69,38 +69,37 @@ def _parse_collated_file(collated_answers_path):
 
 def generate_means_sequence(collated_answers_path):
     """
-    Compute the mean answer value for each of the 100 quiz questions.
+    The average answer of every single one of the 100 questions set 
+    by all students will be calculated.
 
-    For every question position (1 to 100), this function collects all
-    respondents' answers from the collated file and calculates the
-    arithmetic mean, excluding any unanswered entries (represented by 0).
+    From question 1-100, it will gather up everyone's answer. Then, we
+    filter out any 0]s first because it means that student skipped those
+    questions. Once the 0's are gone, the arithmetic means will be figured.
 
     Parameters
     ----------
     collated_answers_path : str
-        Path to the collated_answers.txt file produced by Team Member 2.
-        Each non-separator line must contain exactly 100 space-separated
-        integers (values 1–4 for an answer, 0 for unanswered).
-
+        The file path to the main text file where all the data of students'
+        answers are stored together.
+        
     Returns
     -------
     list of float
-        A list of 100 floats. Each float is the mean answer value for
-        that question across all respondents (zeros excluded).
-        If every respondent left a question unanswered, the mean for
-        that question is recorded as 0.0.
+        The output will be a list of 100 float.
+        Each number should be ranging between 0.0 and 4.0.
+        If there is any chance everyone skips the question, it will just be 0.0.
 
     Raises
     ------
     FileNotFoundError
-        If the file at collated_answers_path does not exist.
+        It will triggers if the path I gave before does not exist.
     ValueError
-        If any data line does not contain exactly 100 integers.
+        It will trigger is there any student's line which does not have 100 numbers.
 
     Examples
     --------
     >>> means = generate_means_sequence("output/collated_answers.txt")
-    >>> print(means[:5])   # first five question means
+    >>> print(means[:5])   # which indicates first five question means
     [2.3, 1.8, 3.1, 2.7, 1.5]
     """
     all_sequences = _parse_collated_file(collated_answers_path)
@@ -124,7 +123,8 @@ def generate_means_sequence(collated_answers_path):
 
 def visualize_data(collated_answers_path, n):
     """
-    Visualise answer data from the collated answers file.
+    The answer data will be plotted in 2 different ways to find the quiz master
+    hidden pattern;
 
     Depending on the value of n, one of two plots is produced:
 
@@ -135,40 +135,43 @@ def visualize_data(collated_answers_path, n):
               (question number 1–100 on the x-axis, answer value 1–4
               on the y-axis).
 
-    If n is neither 1 nor 2, an error message is printed and no plot
-    is produced.
-
+    If the n value is neither 1 nor 2, an error message will appeared and 
+    no plot will be produced
+    
     Parameters
     ----------
     collated_answers_path : str
-        Path to the collated_answers.txt file produced by Team Member 2.
+        The file path to the main text file where all the data of students'
+        answers are stored together
+        
     n : int
-        Plot type selector.
-        1 → scatter plot of means.
-        2 → line plot of all individual respondent sequences.
+        This is the type of plot selector
+        1 is for scatter plot of means of each questions.
+        2 is for a line plot of all individual respondent sequences.
 
     Returns
     -------
     None
-        Displays the plot using matplotlib and does not return a value.
+        This functions will only displays the output graph and
+        will not sreturn any values.
 
     Raises
     ------
     FileNotFoundError
-        If the file at collated_answers_path does not exist.
+        It will triggers if the path I gave before does not exist.
     ValueError
-        If any data line does not contain exactly 100 integers.
+        It will trigger is there any student's line which does not have 100 numbers.
 
     Examples
     --------
     >>> visualize_data("output/collated_answers.txt", 1)
-    # Shows a scatter plot of mean answers per question
+    # this will create a scatter plot of means for each question from 1 - 100
 
     >>> visualize_data("output/collated_answers.txt", 2)
-    # Shows overlapping line plots for every respondent
+    # This will produce line plots for every respondents
 
     >>> visualize_data("output/collated_answers.txt", 5)
-    Error: n must be 1 (scatter plot) or 2 (line plot). Got: 5
+    # it will produce an error because n must be 1 (scatter plot) or 2 (line plot).
     """
 
     if n not in (1, 2):
